@@ -1,7 +1,6 @@
 ##importation
 import random as rand
 import math as math
-import csv as csv
 
 print '\nSimulating. Please wait...'
 def piSimulation(convcrit):
@@ -10,20 +9,16 @@ def piSimulation(convcrit):
     n = 0
     d = 0
     ratios = []
-    xs = []
-    ys = []
     simulating = True # use as a sentinel
     
     while simulating:
         x = rand.random()
         y = rand.random()
-        xs.append(x)
-        ys.append(y)
         if x**2 + y**2 <= 1.0:
             n += 1
         d += 1
         ratio = 4 * n * 1./d
-        ratios.append(ratio)
+
         if abs(ratio-pi) / pi <= convcrit:
             break
     return d
@@ -40,11 +35,6 @@ iterations = [10, 10, 10, 10, 10]
 
 results = map(experiment, iterations, convcritlist)
 print 'The following list of lists is the number of iterations it took to generate pi at varying confidence levels:\n', results
-
-with open("e05.output.csv", "wb") as f:
-    writer = csv.writer(f)
-    writer.writerows(results)
-
 
 def avg(l):
     return float(sum(l))/len(l)
